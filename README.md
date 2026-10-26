@@ -1,4 +1,4 @@
-# NutriStudy
+# Studey
 
 A private, phone-friendly study companion for nutrition and dietetics students. The app runs as a static web page and stores profile, schedule, notebooks, course content, and uploaded text locally in the browser.
 
