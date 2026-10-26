@@ -1,9 +1,19 @@
 # Studey
 
-A private, phone-friendly study companion for nutrition and dietetics students. The app runs as a static web page and stores profile, schedule, notebooks, course content, and uploaded text locally in the browser.
+A private, phone-friendly nutrition and dietetics study companion. Studey includes course notebooks, source-grounded study, course-topic recommendations, reading plans, and opportunity links.
 
-## Use
+## Run locally
 
-Open `index.html` in a modern browser. Create a course notebook, add the course outline under **Course content**, and add textbooks or notes under **Course materials**. Recommendations compare source sections with the course topics and provide search links for books, papers, videos, and trusted nutrition sites.
+Open `index.html` in a modern browser and choose **Continue on this device**. Local mode keeps information in that browser only.
 
-Supported text extraction: PDF, DOCX, TXT, Markdown, and CSV. PDF and DOCX reading use browser libraries loaded from a CDN. Scanned image-only PDFs are not indexed.
+## Enable sign-up, sign-in, and cross-device sync
+
+1. Create a Supabase project.
+2. In the Supabase SQL Editor, run [`supabase/setup.sql`](supabase/setup.sql). This creates the user data table, private source-file bucket, and row-level/storage policies so signed-in users can access only their own data.
+3. Copy your project URL and **publishable key** into [`supabase-config.js`](supabase-config.js). The publishable key is designed for browser use; never put a `service_role` or secret key in this app.
+4. In Supabase Auth, enable email/password sign-in and configure the site URL and allowed redirect URLs for the deployed site.
+5. Serve the app over HTTPS (for example, with GitHub Pages) and sign up. Existing local profile, notebook, and progress data on the first signed-in browser is copied into the new account.
+
+After sign-in, profile details, schedules, plans, notebook metadata, course outlines, and extracted source text sync to the account. Source files use a private Supabase Storage bucket. Changes sync automatically when the browser is online; signing in on another device loads the account data there.
+
+PDF and DOCX text extraction uses browser libraries from a CDN. TXT, Markdown, and CSV are also supported. Scanned image-only PDFs are not indexed.
